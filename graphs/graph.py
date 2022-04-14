@@ -27,9 +27,9 @@ class graph:
         return self.isDirected
 
     def add_edge(self, i, j):
-        if i < 1 or i > self.vertices:
+        if i < 0 or i > self.vertices - 1:
             raise Exception("Source vertex out of range")
-        elif j < 1 or j > self.vertices:
+        elif j < 0 or j > self.vertices - 1:
             raise Exception("Destination vertex out of range")
         elif i == j:
             raise Exception("Self loops forbidden")
@@ -38,3 +38,17 @@ class graph:
 
         if not self.isDirected:
             self.edges.add((j, i))
+
+def power_graph(g):
+    """
+    Takes the multiplication table of a magma as
+    g:[[int]] and returns its undirected power graph
+    """
+    n = len(g)
+    Gamma = graph(n, set(()), False)
+    for i in range(n):
+        j = g[i][i] 
+        while j != i:
+            Gamma.add_edge(i, j)
+            j = g[i][j]
+    return Gamma
