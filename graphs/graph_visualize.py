@@ -11,7 +11,7 @@ def visualize_graph(g):
     """
     print("\\begin{tikzpicture}")
 
-    vertices = [i + 1 for i in range(g.size())]
+    vertices = [i for i in range(g.size())]
     for i in vertices:
         print("\\node (" + str(i) + ") at (" + str(i%2) + ", " +
             str(i//2) + "){$" + str(i) + "$};")
@@ -26,6 +26,7 @@ def visualize_graph(g):
     else:
         print("\\draw", end = "")
         for j in g.get_edges():
+            print("")
             print("(" + str(j[0]) + ") -- (" + str(j[1]) + ")", end = "")
     print(";")
     print("\\end{tikzpicture}")
