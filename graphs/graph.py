@@ -52,3 +52,17 @@ def power_graph(g):
             Gamma.add_edge(i, j)
             j = g[i][j]
     return Gamma
+
+def directed_power_graph(g):
+    """
+    Takes the multiplication table of a magma as
+    g:[[int]] and returns its directed power graph
+    """
+    n = len(g)
+    Gamma = graph(n, set(()), True)
+    for i in range(n):
+        j = g[i][i] 
+        while j != i:
+            Gamma.add_edge(i, j)
+            j = g[i][j]
+    return Gamma
