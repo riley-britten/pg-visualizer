@@ -39,27 +39,15 @@ class graph:
         if not self.isDirected:
             self.edges.add((j, i))
 
-def power_graph(g):
+def power_graph(g, directed = False):
     """
     Takes the multiplication table of a magma as
-    g:[[int]] and returns its undirected power graph
+    g:[[int]] and returns its power graph, either
+    directed or undirected as determined by the
+    directed argument.
     """
     n = len(g)
-    Gamma = graph(n, set(()), False)
-    for i in range(n):
-        j = g[i][i] 
-        while j != i:
-            Gamma.add_edge(i, j)
-            j = g[i][j]
-    return Gamma
-
-def directed_power_graph(g):
-    """
-    Takes the multiplication table of a magma as
-    g:[[int]] and returns its directed power graph
-    """
-    n = len(g)
-    Gamma = graph(n, set(()), True)
+    Gamma = graph(n, set(()), directed)
     for i in range(n):
         j = g[i][i] 
         while j != i:
