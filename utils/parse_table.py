@@ -1,6 +1,6 @@
 def parse_table(s):
     """
-    Takes a Cayley table as a string formatted as in GAP and
+    Takes a multiplication table as a string formatted as in GAP and
     returns the Cayley table as an array of arrays of ints.
     This will generally involve relabeling elements.
     """ 
