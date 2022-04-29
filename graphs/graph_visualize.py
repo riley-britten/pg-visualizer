@@ -34,19 +34,29 @@ def visualize_graph(g):
     print("\\end{tikzpicture}")
 
 def main():
+  directed = False
+  options = []
+
   if len(sys.argv) < 2:
-    print("Usage: graph_visualize -f <file containing multiplication table>")
+    print("Usage: graph_visualize -f <file containing multiplication table>\n" +
+            "or graph_visualize \"<TABLE>\"")
     return 1 
-  elif sys.argv[1] != "-f":
-    print ("The only currently supported option is -f")
-    return 1
-  elif len(sys.argv) < 3:
-    print ("Usage: graph_visualize -f <file containing multiplication table>")
-    return 1
-  f = open(sys.argv[2], "r")
-  table = f.read()
-  table = parse_table(table)
-  G = power_graph(table)
+
+  # Parse command line options
+  for i in range(1, len(sys.argv) - 1):
+    options.append(sys.argv[i])
+
+  if "-d" in options:
+    directed = True
+ 
+  if "-f" in options:
+    f = open(sys.argv[len(sys.argv) - 1], "r")
+    table = parse_table(f.read())
+  else:
+    print("Table to parse " + sys.argv[len(sys.argv) - 1])
+    table = parse_table(sys.argv[len(sys.argv) - 1])
+
+  G = power_graph(table, directed)
   visualize_graph(G)
   return 0
 
